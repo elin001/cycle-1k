@@ -35,33 +35,28 @@ async function fetchAllRides(accessToken) {
 }
 
 function computeStats(rides) {
+  const toMiles = m => +(m / 1609.34).toFixed(1);
+
   if (!rides.length) {
-    return {
-      totalMiles: 0,
-      lastRideMiles: 0,
-      avgMilesPerWeek: 0,
-      lastRideTitle: null,
-      lastRideDescription: null,
-    };
+    return { totalMiles: 0, avgMilesPerWeek: 0, recentRides: [] };
   }
 
-  const toMiles = m => +(m / 1609.34).toFixed(1);
   const totalMiles = toMiles(rides.reduce((sum, r) => sum + r.distance, 0));
-
   const sorted = [...rides].sort((a, b) => new Date(b.start_date) - new Date(a.start_date));
-  const last = sorted[0];
 
   const msElapsed = Date.now() - MEMORIAL_DAY_2026 * 1000;
   const weeksElapsed = Math.max(msElapsed / (7 * 24 * 60 * 60 * 1000), 1);
   const avgMilesPerWeek = +(totalMiles / weeksElapsed).toFixed(1);
 
-  return {
-    totalMiles,
-    lastRideMiles: toMiles(last.distance),
-    avgMilesPerWeek,
-    lastRideTitle: last.name || null,
-    lastRideDescription: last.description || null,
-  };
+  const recentRides = sorted.slice(0, 3).map(r => ({
+    title: r.name || null,
+    description: r.description || null,
+    miles: toMiles(r.distance),
+    date: (r.start_date_local || r.start_date || '').slice(0, 10),
+    polyline: r.map?.summary_polyline || null,
+  }));
+
+  return { totalMiles, avgMilesPerWeek, recentRides };
 }
 
 export default async function handler(req, res) {
