@@ -12,7 +12,7 @@
   </h1>
 
   <p
-    class="font-sans font-normal text-ink mt-10 max-w-sm md:max-w-lg leading-relaxed m-0 md:ml-4"
+    class="font-sans font-light text-ink mt-10 max-w-sm md:max-w-lg leading-relaxed m-0 md:ml-4"
     style="font-size: clamp(1rem, 2.5vw, 1.2rem);"
   >
     This summer, Alex Boyd and Ellie Lin set out to accomplish a difficult but

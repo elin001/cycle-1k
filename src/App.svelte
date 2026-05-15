@@ -7,7 +7,6 @@
 
   let innerWidth = $state(0);
   let isMobile = $derived(innerWidth < 768);
-  let isDesktop = $derived(innerWidth >= 1160);
 
   // Hard-coded user metadata — names and photos don't change.
   const USERS = [
@@ -23,6 +22,7 @@
   let stats2 = $state.raw(null);
   let loading1 = $state(true);
   let loading2 = $state(true);
+  let fetchedAt = $state.raw(null);
 
   let activeIndex = $state(0);
 
@@ -47,6 +47,7 @@
     stats2 = res2.status === "fulfilled" ? res2.value : null;
     loading1 = false;
     loading2 = false;
+    fetchedAt = new Date();
   }
 
   loadStats();
@@ -75,9 +76,11 @@
   }
 </script>
 
+<svelte:window bind:innerWidth />
+
 <div {@attach observeSections}>
   <HeroSection />
-  <CardsSection {userData} />
+  <CardsSection {userData} {fetchedAt} />
   {#if isMobile}
     <div class="md:hidden">
       <ProgressTracker users={progressUsers} orientation="vertical" />
