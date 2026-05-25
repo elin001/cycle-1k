@@ -53,11 +53,29 @@
   <div class="hidden md:block w-full">
     <ProgressTracker users={progressUsers} orientation="horizontal" />
   </div>
+
+  <!-- Strava attribution — required by API agreement -->
+  <div class="flex justify-center pb-6 pt-2">
+    <a href="https://www.strava.com" target="_blank" rel="noopener noreferrer" aria-label="Powered by Strava">
+      <img src="/strava-badge.svg" alt="Powered by Strava" class="strava-badge" />
+    </a>
+  </div>
 </section>
 
 <style>
   .cards-section {
     min-height: 100svh;
     scroll-snap-align: start;
+  }
+
+  .strava-badge {
+    height: 13px;
+    width: auto;
+    opacity: 0.4;
+    transition: opacity 0.2s;
+  }
+
+  .strava-badge:hover {
+    opacity: 0.7;
   }
 </style>
