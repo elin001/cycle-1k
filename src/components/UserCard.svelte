@@ -50,7 +50,7 @@
     <!-- Top stats: only 2 numbers now that last-ride detail lives below -->
     <div class="grid grid-cols-2 gap-x-4 gap-y-6 w-full text-center mb-8">
       <div class="flex flex-col items-center gap-1">
-        <span class="font-serif font-bold text-ink leading-none" style="font-size:2.75rem;">
+        <span class="font-sans font-bold text-ink leading-none" style="font-size:2.75rem;">
           {tweenMiles.current.toLocaleString(undefined, { maximumFractionDigits: 1 })}
         </span>
         <span class="font-sans font-medium text-[0.65rem] tracking-widest uppercase text-ink-muted">
