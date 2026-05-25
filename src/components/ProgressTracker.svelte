@@ -62,8 +62,7 @@
       <div class="absolute top-1/2 right-0 -translate-y-1/2 text-xl leading-none">🏁</div>
     </div>
 
-    <div class="flex justify-between mt-1 font-sans text-[0.65rem] text-ink-muted font-medium tracking-wide">
-      <span>0 mi</span>
+    <div class="flex justify-end -mt-12 font-sans text-[0.65rem] text-ink-muted font-medium tracking-wide">
       <span>1,000 mi</span>
     </div>
   </div>
@@ -72,8 +71,6 @@
   <!-- ─── MOBILE: full-height vertical section ─────────────────────────── -->
   <section id="progress" class="h-svh bg-cream flex items-center justify-center">
     <div class="track-v-wrap relative flex flex-col items-center h-full py-12">
-      <span class="font-sans text-[0.65rem] text-ink-muted font-medium tracking-wide mb-2">0 mi</span>
-
       <!-- Track: rail + riders share the same positioned parent -->
       <div class="track-v-inner relative flex-1" bind:clientHeight={trackH}>
         <!-- Rail: sibling of riders, NOT a parent, so opacity doesn't bleed -->
@@ -128,8 +125,8 @@
         {/if}
       </div>
 
-      <span class="text-2xl leading-none mt-2">🏁</span>
-      <span class="font-sans text-[0.65rem] text-ink-muted font-medium tracking-wide mt-1">1,000 mi</span>
+      <span class="text-2xl leading-none mt-1">🏁</span>
+      <span class="font-sans text-[0.65rem] text-ink-muted font-medium tracking-wide">1,000 mi</span>
     </div>
   </section>
 {/if}

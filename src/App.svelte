@@ -53,8 +53,12 @@
   loadStats();
 
   // Drive dot nav via IntersectionObserver.
-  /** @param {HTMLElement} node */
-  function observeSections(node) {
+  // $effect runs after all children are mounted, so getElementById reliably finds
+  // every section. Re-runs when isMobile changes so the observer picks up the
+  // progress section if it was just added to the DOM.
+  $effect(() => {
+    isMobile; // explicit dependency — re-init when mobile layout appears/disappears
+
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -72,13 +76,13 @@
       if (el) observer.observe(el);
     }
 
-    return { destroy: () => observer.disconnect() };
-  }
+    return () => observer.disconnect();
+  });
 </script>
 
 <svelte:window bind:innerWidth />
 
-<div {@attach observeSections}>
+<div>
   <HeroSection />
   <CardsSection {userData} {fetchedAt} />
   {#if isMobile}
