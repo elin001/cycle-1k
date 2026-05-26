@@ -1,4 +1,4 @@
-const MEMORIAL_DAY_2026 = 1748131200; // 2026-05-25 00:00:00 UTC
+const MEMORIAL_DAY_2026 = 1779667200; // 2026-05-25 00:00:00 UTC
 
 async function refreshAccessToken(refreshToken) {
   const res = await fetch('https://www.strava.com/oauth/token', {
