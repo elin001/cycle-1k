@@ -58,7 +58,7 @@
         </span>
       </div>
       <div class="flex flex-col items-center gap-1">
-        <span class="font-serif font-bold text-ink leading-none" style="font-size:2.75rem;">
+        <span class="font-sans font-bold text-ink leading-none" style="font-size:2.75rem;">
           {tweenAvg.current.toFixed(1)}
         </span>
         <span class="font-sans font-medium text-[0.65rem] tracking-widest uppercase text-ink-muted">
