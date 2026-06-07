@@ -16,7 +16,7 @@
 </script>
 
 <div class="flex flex-col">
-  {#each rides as ride, i (`${ride.date}-${ride.title ?? ''}`)}
+  {#each rides as ride, i (`${ride.date}-${i}`)}
     <div class="flex gap-3 items-start" transition:slide={{ duration: 300, axis: 'y' }}>
       <!-- Dot + connecting line column -->
       <div class="flex flex-col items-center flex-shrink-0" style="width:16px;">
