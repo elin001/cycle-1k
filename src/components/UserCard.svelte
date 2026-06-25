@@ -21,9 +21,9 @@
   });
 </script>
 
-<article class="card flex flex-col items-center flex-1 max-h-[50dvh] md:max-h-none min-w-0 px-8 py-10 bg-white rounded-2xl shadow-sm">
+<article class="card flex flex-col items-center flex-1 max-h-[40dvh] md:max-h-none min-w-0 px-8 py-8 bg-white rounded-2xl shadow-sm">
   {#if photoFailed}
-    <div class="w-20 h-20 rounded-full mb-3 flex items-center justify-center bg-skeleton-a">
+    <div class="w-20 h-20 rounded-full mb-3 flex items-center justify-center bg-light-blue">
       <span class="font-sans font-black text-ink-muted text-2xl">{initial}</span>
     </div>
   {:else}
