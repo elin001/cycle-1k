@@ -1,43 +1,68 @@
-# Svelte + Vite
+# cyc1ke
 
-This template should help get you started developing with Svelte in Vite.
+A live progress tracker for a summer cycling challenge: biking 1,000 miles each between Memorial Day and Labor Day 2026.
 
-## Recommended IDE Setup
+Built with Svelte, Tailwind and Vercel serverless functions backed by the Strava API.
 
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
+## What it does
 
-## Need an official Svelte framework?
+Ride data is fetched live from Strava on each page load. No database, no caching — just a serverless function that refreshes the OAuth token, pulls activities since May 25 2026, and computes stats on the fly.
 
-Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
+## Stack
 
-## Technical considerations
+| Layer | Tech |
+|---|---|
+| Frontend | Svelte, Tailwind |
+| Backend | Vercel serverless functions (`/api`) |
+| Data | Strava API v3 |
+| Deploy | Vercel |
 
-**Why use this over SvelteKit?**
+## Local development
 
-- It brings its own routing solution which might not be preferable for some users.
-- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
+Ride data requires real Strava credentials. Without them the cards show "Could not load data", which is expected.
 
-This template contains as little as possible to get started with Vite + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
+```bash
+npm install
+npm run dev
+```
 
-Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
+For full end-to-end testing with live data, use `vercel dev` (requires the [Vercel CLI](https://vercel.com/docs/cli)) with a `.env` file:
 
-**Why include `.vscode/extensions.json`?**
+```
+STRAVA_CLIENT_ID=
+STRAVA_CLIENT_SECRET=
+STRAVA_USER1_REFRESH_TOKEN=
+STRAVA_USER2_REFRESH_TOKEN=
+```
 
-Other templates indirectly recommend extensions via the README, but this file allows VS Code to prompt the user to install the recommended extension upon opening the project.
+## Strava setup (one-time per athlete)
 
-**Why enable `checkJs` in the JS template?**
+1. Create a Strava API application at [strava.com/settings/api](https://www.strava.com/settings/api)
+2. Set `STRAVA_CLIENT_ID` and `STRAVA_CLIENT_SECRET` in Vercel environment variables
+3. Each athlete visits `/setup.html`, clicks **Authorize with Strava**, and copies their refresh token from the callback page
+4. Add both tokens to Vercel as `STRAVA_USER1_REFRESH_TOKEN` and `STRAVA_USER2_REFRESH_TOKEN`
+5. Redeploy
 
-It is likely that most cases of changing variable types in runtime are likely to be accidental, rather than deliberate. This provides advanced typechecking out of the box. Should you like to take advantage of the dynamically-typed nature of JavaScript, it is trivial to change the configuration.
+## Project structure
 
-**Why is HMR not preserving my local component state?**
-
-HMR state preservation comes with a number of gotchas! It has been disabled by default in both `svelte-hmr` and `@sveltejs/vite-plugin-svelte` due to its often surprising behavior. You can read the details [here](https://github.com/sveltejs/svelte-hmr/tree/master/packages/svelte-hmr#preservation-of-local-state).
-
-If you have state that's important to retain within a component, consider creating an external store which would not be replaced by HMR.
-
-```js
-// store.js
-// An extremely simple external store
-import { writable } from 'svelte/store'
-export default writable(0)
+```
+src/
+  App.svelte               # root: fetch orchestration, scroll observer, layout
+  app.css                  # Tailwind + design tokens
+  components/
+    Hero.svelte            # section 1
+    CardsSection.svelte    # section 2 shell
+    UserCard.svelte        # per-rider stat card with tween animations
+    ProgressTracker.svelte # horizontal (desktop) + vertical (mobile) rail
+    RideTimeline.svelte    # dot-connected recent rides list
+    RoutePreview.svelte    # polyline map preview for last ride
+    PaceChart.svelte       # cumulative miles vs. ideal pace sparkline
+    DotNav.svelte          # fixed left-side dot nav (mobile only)
+api/
+  strava.js                # GET ?user=1|2 → stats JSON
+  auth-callback.js         # one-time OAuth code → refresh token
+  setup.js                 # redirects to Strava OAuth using server-side client ID
+public/
+  setup.html               # one-time setup UI for each athlete
+  photos/                  # alex.jpg, ellie.jpg (not committed)
 ```
