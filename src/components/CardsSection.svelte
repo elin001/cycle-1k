@@ -31,14 +31,14 @@
   });
 </script>
 
-<section id="cards" class="cards-section bg-cream flex flex-col">
+<section id="cards" class="cards-section bg-light-blue flex flex-col">
   {#if updatedLabel}
-    <p class="text-center font-sans text-[0.65rem] tracking-widest uppercase text-blue pt-6 pb-0 m-0 opacity-60">
+    <p class="text-center font-sans text-[0.65rem] tracking-widest uppercase text-blue pt-3 pb-0 m-0">
       {updatedLabel}
     </p>
   {/if}
 
-  <div class="flex flex-col md:flex-row flex-1 min-h-0 gap-4 md:gap-8 px-6 py-8 md:py-12 max-w-4xl w-full mx-auto">
+  <div class="flex flex-col md:flex-row flex-1 min-h-0 gap-3 md:gap-8 px-6 py-6 md:py-12 max-w-4xl w-full mx-auto">
     {#each userData as user (user.name)}
       <UserCard
         name={user.name}

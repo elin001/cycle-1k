@@ -1,6 +1,6 @@
 <section
   id="hero"
-  class="h-svh scroll-snap-start bg-cream flex flex-col justify-center px-8 md:px-24 items-center text-left md:items-center md:text-left"
+  class="h-svh scroll-snap-start bg-light-blue flex flex-col justify-center px-8 md:px-24 items-center text-left md:items-center md:text-left"
 >
   <span class="text-9xl mb-6 select-none" aria-hidden="true">🚴</span>
 

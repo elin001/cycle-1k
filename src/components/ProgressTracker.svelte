@@ -39,7 +39,7 @@
 
 {#if orientation === 'horizontal'}
   <!-- ─── DESKTOP: full-width horizontal bar ────────────────────────────── -->
-  <div class="w-full px-10 py-6 bg-cream">
+  <div class="w-full px-10 py-6 bg-light-blue">
     <div class="h-track relative">
       <!-- Rail -->
       <div class="absolute top-1/2 left-0 right-0 h-px bg-ink-muted opacity-20 -translate-y-1/2"></div>
@@ -69,7 +69,7 @@
 
 {:else}
   <!-- ─── MOBILE: full-height vertical section ─────────────────────────── -->
-  <section id="progress" class="h-svh bg-cream flex items-center justify-center">
+  <section id="progress" class="h-svh bg-light-blue flex items-center justify-center">
     <div class="track-v-wrap relative flex flex-col items-center h-full py-12">
       <!-- Track: rail + riders share the same positioned parent -->
       <div class="track-v-inner relative flex-1" bind:clientHeight={trackH}>
