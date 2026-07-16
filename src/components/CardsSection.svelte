@@ -38,7 +38,7 @@
     </p>
   {/if}
 
-  <div class="flex flex-col md:flex-row flex-1 min-h-0 gap-3 md:gap-8 px-6 py-6 md:py-12 max-w-4xl w-full mx-auto">
+  <div class="flex flex-col md:flex-row md:flex-1 md:min-h-0 gap-3 md:gap-8 px-6 py-6 md:py-12 max-w-4xl w-full mx-auto">
     {#each userData as user (user.name)}
       <UserCard
         name={user.name}
